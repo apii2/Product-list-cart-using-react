@@ -14,5 +14,5 @@
 }
 
 body{
-  @apply font-red-hat-text;
+  @apply font-red-hat-text bg-rose-50;
 }
