@@ -25,7 +25,11 @@ export default function Product(props){
         {props.list.map((dat)=>(
           <article key={dat.name}>
             <div className="relative mb-8">
-              <img src={dat.image.desktop} alt={dat.name} className={`rounded-lg h-40 lg:48 w-full object-cover ${dat.selected && 'ring-2 ring-red'}`}/>
+              <picture>
+                <source media='(max-width:639px)' srcSet={dat.image.mobile}/>
+                <source media='(max-width:1023px)' srcSet={dat.image.tablet}/>
+                <img src={dat.image.desktop} alt={dat.name} className={`rounded-lg lg:w-full lg:h-48 lg:object-cover ${dat.selected && 'ring-2 ring-red'}`}/>
+              </picture>
 
               {!dat.selected && <button onClick={()=>props.setList(prevList => prevList.map((item)=>(item.id === dat.id? {...item, selected: true}: item)))}
                 className='cursor-pointer text-center w-[70%] xs:w-[90%] sm:w-full lg:w-[80%] py-2 font-semibold text-rose-900 ring-1 ring-rose-900 rounded-full bg-rose-50 
