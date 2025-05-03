@@ -1,7 +1,6 @@
 import Cake from '../assets/images/illustration-empty-cart.svg'
 import CarbonNeutral from '../assets/images/icon-carbon-neutral.svg'
 import Remove from '../assets/images/icon-remove-item.svg'
-import { useState } from 'react'
 
 export default function Cart(props){
   function totalPrice(){

@@ -19,9 +19,9 @@ export default function OrderConfirm(props){
 
   return (
     <section onClick={()=>{props.setIsPopupOpen(false)}} 
-      className="fixed top-0 left-0 h-[100vh] w-[98vw] flex items-center justify-center bg-black/50">
+      className="fixed top-0 left-0 h-[100vh] w-[100vw] flex items-end sm:items-center justify-center bg-black/50">
       <div onClick={(e)=>e.stopPropagation()} 
-        className="bg-white px-6 py-6 w-100 rounded-md">
+        className="bg-white px-6 py-6 w-100 rounded-t-2xl sm:rounded-md">
         <img src={Confirm} alt="Confirmation tick icon" className='w-6 mb-3'/>
         <header className="font-bold text-2xl text-rose-900">Order Confirmed</header>
         <p className="text-rose-500 text-sm mb-3">We hope you enjoy your food!</p>
@@ -49,10 +49,10 @@ export default function OrderConfirm(props){
             Order Total
             <p className='font-bold text-lg text-rose-900'>${sum.toFixed(2)}</p>
           </div>
-
-          <button onClick={StartNewOrder}
-            className="py-2 w-full bg-red rounded-full text-white cursor-pointer hover:bg-red-800 capitalize">Start new order</button>
         </div>
+        
+        <button onClick={StartNewOrder}
+            className="py-2 w-full bg-red rounded-full text-white cursor-pointer hover:bg-red-800 capitalize">Start new order</button>
       </div>
     </section>
   )

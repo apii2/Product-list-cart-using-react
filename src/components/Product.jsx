@@ -19,23 +19,23 @@ export default function Product(props){
 
   return (
     <section>
-      <header className="font-bold text-2xl mb-6 text-rose-900">Desserts</header>
+      <header className="font-bold text-3xl mb-6 text-rose-900">Desserts</header>
 
-      <div className='grid grid-cols-3 gap-6'>
+      <div className='grid xs:grid-cols-2 md:grid-cols-3 gap-6'>
         {props.list.map((dat)=>(
-          <article key={dat.name} className=''>
+          <article key={dat.name}>
             <div className="relative mb-8">
-              <img src={dat.image.desktop} alt={dat.name} className={`rounded-lg ${dat.selected && 'ring-2 ring-red'}`}/>
+              <img src={dat.image.desktop} alt={dat.name} className={`rounded-lg h-40 lg:48 w-full object-cover ${dat.selected && 'ring-2 ring-red'}`}/>
 
               {!dat.selected && <button onClick={()=>props.setList(prevList => prevList.map((item)=>(item.id === dat.id? {...item, selected: true}: item)))}
-                className='cursor-pointer text-center w-[70%] py-2 font-semibold text-rose-900 ring-1 ring-rose-900 rounded-full bg-rose-50 
+                className='cursor-pointer text-center w-[70%] xs:w-[90%] sm:w-full lg:w-[80%] py-2 font-semibold text-rose-900 ring-1 ring-rose-900 rounded-full bg-rose-50 
                 absolute -translate-y-5 left-0 right-0 mx-auto
                 hover:text-red hover:ring-red'>
                 <img src={Cart} alt='Cart icon' className='inline-block me-2'/>
                 Add to Cart
               </button>}
 
-              {dat.selected && <div className='cursor-pointer text-center w-[70%] px-3 py-2 font-semibold text-white
+              {dat.selected && <div className='cursor-pointer text-center w-[70%] xs:w-[90%] sm:w-full lg:w-[80%] px-3 py-2 font-semibold text-white
                 ring-1 ring-red rounded-full bg-red flex justify-between items-center
                 absolute -translate-y-5 left-0 right-0 mx-auto
                 hover:ring-red-800 hover:bg-red-800'>

@@ -11,6 +11,8 @@
   --color-rose-900: hsl(14, 65%, 9%);
 
   --font-red-hat-text: 'Red Hat Text', sans-serif;
+
+  --breakpoint-xs: 425px;
 }
 
 body{
