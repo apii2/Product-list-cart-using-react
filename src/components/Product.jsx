@@ -26,9 +26,9 @@ export default function Product(props){
           <article key={dat.name}>
             <div className="relative mb-8">
               <picture>
-                <source media='(max-width:639px)' srcSet={dat.image.mobile}/>
-                <source media='(max-width:1023px)' srcSet={dat.image.tablet}/>
-                <img src={dat.image.desktop} alt={dat.name} className={`rounded-lg lg:w-full lg:h-48 lg:object-cover ${dat.selected && 'ring-2 ring-red'}`}/>
+                <source media='(max-width:639px)' srcSet={`${import.meta.env.BASE_URL}${dat.image.mobile}`}/>
+                <source media='(max-width:1023px)' srcSet={`${import.meta.env.BASE_URL}${dat.image.tablet}`}/>
+                <img src={`${import.meta.env.BASE_URL}${dat.image.desktop}`} alt={dat.name} className={`rounded-lg lg:w-full lg:h-48 lg:object-cover ${dat.selected && 'ring-2 ring-red'}`}/>
               </picture>
 
               {!dat.selected && <button onClick={()=>props.setList(prevList => prevList.map((item)=>(item.id === dat.id? {...item, selected: true}: item)))}

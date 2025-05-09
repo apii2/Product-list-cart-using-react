@@ -32,7 +32,7 @@ export default function OrderConfirm(props){
               <div className="flex items-center justify-between">
 
                 <div className="flex items-center">
-                  <img src={item.image.thumbnail} alt="Thumbnail" className='w-8 h-8 rounded-sm me-3'/>
+                  <img src={`${import.meta.env.BASE_URL}${item.image.thumbnail}`} alt="Thumbnail" className='w-8 h-8 rounded-sm me-3'/>
                   <div className="text-xs font-semibold">
                     <h4 className='text-rose-900'>{item.name}</h4>
                     <p className='text-red inline-block me-4'>{item.quantity}x</p>
