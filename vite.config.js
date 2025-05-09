@@ -8,5 +8,5 @@ export default defineConfig({
     react(),
     tailwindcss()
   ],
-  base: './'
+  base: '/Product-list-cart-using-react/'
 })
