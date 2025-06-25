@@ -1,17 +1,22 @@
 import Cake from '../assets/images/illustration-empty-cart.svg'
 import CarbonNeutral from '../assets/images/icon-carbon-neutral.svg'
 import Remove from '../assets/images/icon-remove-item.svg'
+import { useContext } from 'react'
+import { ListContext } from '../contexts/ListContext'
 
-export default function Cart(props){
+export default function Cart(){
+  const {list, setList, setIsPopupOpen} = useContext(ListContext);
+  const filteredList = list.filter((dat)=>dat.selected);
+
   function totalPrice(){
     let sum = 0 
-    props.list.map((item)=>sum += item.price*item.quantity)
+    filteredList.map((item)=>sum += item.price*item.quantity)
     return sum
   }
   let sum = totalPrice()
 
   function RemoveItem(id){
-    props.setList(prev=>(
+    setList(prev=>(
       prev.map((item)=>(
         item.id === id ? {...item, selected: false, quantity: 1} : item
       ))
@@ -20,18 +25,18 @@ export default function Cart(props){
 
   return (
     <section className='bg-white h-fit rounded-md px-4 py-4'>
-      <header className='text-red font-bold text-lg mb-6'>Your Cart ({props.list.length})</header>
+      <header className='text-red font-bold text-lg mb-6'>Your Cart ({filteredList.length})</header>
 
-      {props.list.length === 0 && 
+      {filteredList.length === 0 && 
         <div className="flex flex-col items-center justify-center gap-3">
           <img src={Cake} alt="Empty cart cake icon" className='w-24'/>
           <p className='text-sm text-rose-400 font-semibold'>Your added items will appear here</p>
         </div>
       }
 
-      {props.list.length > 0 && 
+      {filteredList.length > 0 && 
         <div>
-          {props.list.map((item)=>(
+          {filteredList.map((item)=>(
             <div className="not-first:pt-4" key={item.name}>
               <div className="flex items-center justify-between">
                 <div className="text-sm font-semibold">
@@ -59,7 +64,7 @@ export default function Cart(props){
             This is a <b>carbon-neutral</b> delivery
           </div>
 
-          <button onClick={()=>props.setIsPopupOpen(true)}
+          <button onClick={()=>setIsPopupOpen(true)}
             className="py-3 w-full bg-red rounded-full text-white cursor-pointer hover:bg-red-800">Confirm Order</button>
         </div>
       }

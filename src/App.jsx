@@ -3,7 +3,7 @@ import Data from '../data.json'
 import Product from './components/Product'
 import Cart from './components/Cart'
 import OrderConfirm from './components/OrderConfirm'
-import './App.css'
+import { ListContext } from './contexts/ListContext'
 
 export default function App() {
   const [list, setList] = useState([])
@@ -19,9 +19,11 @@ export default function App() {
 
   return (
     <main className='px-8 py-6 lg:px-20 lg:py-10 grid grid-cols-1 sm:grid-cols-[60%_auto] md:grid-cols-[70%_auto] gap-6 relative'>
-      <Product setList={setList} list={list}/>
-      <Cart list={list.filter((dat)=>dat.selected)} setList={setList} setIsPopupOpen={setIsPopupOpen}/>
-      {isPopupOpen && <OrderConfirm list={list.filter((dat)=>dat.selected)} setList={setList} setIsPopupOpen={setIsPopupOpen}/>}
+      <ListContext.Provider value={{list, setList, setIsPopupOpen}}>
+        <Product />
+        <Cart />
+        {isPopupOpen && <OrderConfirm />}
+      </ListContext.Provider>
     </main>
   )
 }

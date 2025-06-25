@@ -1,8 +1,12 @@
+import { useContext } from 'react'
 import Cart from '../assets/images/icon-add-to-cart.svg'
+import { ListContext } from '../contexts/ListContext'
 
-export default function Product(props){
+export default function Product(){
+  const {list, setList} = useContext(ListContext);
+
   function addQuantity(id){
-    props.setList((prev)=>(
+    setList((prev)=>(
       prev.map((item)=>(
         item.id === id ? {...item, quantity: item.quantity+1} : item
       ))
@@ -10,7 +14,7 @@ export default function Product(props){
   }
 
   function subQuantity(id){
-    props.setList((prev)=>(
+    setList((prev)=>(
       prev.map((item)=>(
         (item.id === id && item.quantity > 1) ? {...item, quantity: item.quantity-1} : item
       ))
@@ -22,7 +26,7 @@ export default function Product(props){
       <header className="font-bold text-3xl mb-6 text-rose-900">Desserts</header>
 
       <div className='grid xs:grid-cols-2 md:grid-cols-3 gap-6'>
-        {props.list.map((dat)=>(
+        {list.map((dat)=>(
           <article key={dat.name}>
             <div className="relative mb-8">
               <picture>
@@ -31,7 +35,7 @@ export default function Product(props){
                 <img src={`${import.meta.env.BASE_URL}${dat.image.desktop}`} alt={dat.name} className={`rounded-lg lg:w-full lg:h-48 lg:object-cover ${dat.selected && 'ring-2 ring-red'}`}/>
               </picture>
 
-              {!dat.selected && <button onClick={()=>props.setList(prevList => prevList.map((item)=>(item.id === dat.id? {...item, selected: true}: item)))}
+              {!dat.selected && <button onClick={()=>setList(prevList => prevList.map((item)=>(item.id === dat.id? {...item, selected: true}: item)))}
                 className='cursor-pointer text-center w-[70%] xs:w-[90%] sm:w-full lg:w-[80%] py-2 font-semibold text-rose-900 ring-1 ring-rose-900 rounded-full bg-rose-50 
                 absolute -translate-y-5 left-0 right-0 mx-auto
                 hover:text-red hover:ring-red'>

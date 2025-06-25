@@ -1,16 +1,21 @@
 import Confirm from '../assets/images/icon-order-confirmed.svg'
+import { useContext } from 'react'
+import { ListContext } from '../contexts/ListContext'
 
-export default function OrderConfirm(props){
+export default function OrderConfirm(){
+  const {list, setList, setIsPopupOpen} = useContext(ListContext);
+  const filteredList = list.filter((dat)=>dat.selected);
+
   function totalPrice(){
     let sum = 0 
-    props.list.map((item)=>sum += item.price*item.quantity)
+    filteredList.map((item)=>sum += item.price*item.quantity)
     return sum
   }
   let sum = totalPrice()
 
   function StartNewOrder(){
-    props.setIsPopupOpen(false)
-    props.setList(prev=>(
+    setIsPopupOpen(false)
+    setList(prev=>(
       prev.map(item=>(
         {...item, selected: false}
       ))
@@ -18,7 +23,7 @@ export default function OrderConfirm(props){
   }
 
   return (
-    <section onClick={()=>{props.setIsPopupOpen(false)}} 
+    <section onClick={()=>{setIsPopupOpen(false)}} 
       className="fixed top-0 left-0 h-[100vh] w-[100vw] flex items-end sm:items-center justify-center bg-black/50">
       <div onClick={(e)=>e.stopPropagation()} 
         className="bg-white px-6 py-6 w-100 rounded-t-2xl sm:rounded-md">
@@ -27,7 +32,7 @@ export default function OrderConfirm(props){
         <p className="text-rose-500 text-sm mb-3">We hope you enjoy your food!</p>
 
         <div className='bg-rose-50 px-3 py-3'>
-          {props.list.map((item)=>(
+          {filteredList.map((item)=>(
             <div className="not-first:pt-2" key={item.name}>
               <div className="flex items-center justify-between">
 
